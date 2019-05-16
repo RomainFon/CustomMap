@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "place-0",
+    "posX": 120,
+    "posY": 120
+  },
+  {
+    "id": 2,
+    "name": "place-1",
+    "posX": 270,
+    "posY": 80
+  },
+  {
+    "id": 3,
+    "name": "place-2",
+    "posX": 380,
+    "posY": 400
+  }
+]

@@ -1,22 +1,36 @@
-import React from 'react';
-import {updateText} from "../../store/actions/text";
-import {getText} from "../../store/reducers/text";
+import React, {Component} from 'react';
+
 import {compose} from "redux";
 import connect from "react-redux/es/connect/connect";
-import {Link} from "react-router-dom";
+import {getPlaces} from "../../store/reducers/place";
+import { updateCurentId} from "../../store/actions/place";
 
-const Custom = (props) => {
-    const {text,dispatch} = props;
-    return (
-        <div className="Preview">
-            <input onChange={e => dispatch(updateText(e.currentTarget.value))} value={text.value} />
-            <Link to={'/'}>preview</Link>
-        </div>
-    );
-};
+
+class Custom extends Component{
+
+    rendererPlaces(){
+        const {dispatch} = this.props;
+        let places = this.props.places.map(item =>
+            <div key={item.id} className={"Custom__item"} onClick={ () => dispatch(updateCurentId(item.id))}>
+                <h2>{item.name}</h2>
+                <h4>{item.posX + " - " + item.posY}</h4>
+            </div>
+        );
+        return places;
+    }
+
+    render(){
+        return(
+            <div className="Custom">
+                <h1>CustomMap</h1>
+                { this.rendererPlaces() }
+            </div>
+        )
+    }
+}
 
 const mapStateToProps = state => ({
-    text: getText(state),
+    places: getPlaces(state),
 });
 
 const enhance = compose(connect(mapStateToProps));
